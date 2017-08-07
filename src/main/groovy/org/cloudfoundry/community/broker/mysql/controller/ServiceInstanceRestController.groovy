@@ -9,10 +9,6 @@ import org.springframework.web.bind.annotation.RequestMapping
 import org.springframework.web.bind.annotation.RequestMethod
 import org.springframework.web.bind.annotation.ResponseBody
 
-/**
- * Author: Sridharan Kuppa sridharan.kuppa@gmail.com
- * Date: 12/12/13
- */
 
 @Controller
 @RequestMapping("/v2/service_instances/{id}")
@@ -23,20 +19,28 @@ class ServiceInstanceRestController {
   @RequestMapping(method = RequestMethod.PUT)
   @ResponseBody
   Map update(@PathVariable String id) {
+    String msg
     ServiceInstance instance = service.findById(id)
     if (!service.isExists(instance)) {
       service.create(instance)
+      msg = "database is created"
+    }else{
+      msg = "database exists, won't create"
     }
-    return [:]
+    return [reply:msg]
   }
 
   @RequestMapping(method = RequestMethod.DELETE)
   @ResponseBody
   Map destroy(@PathVariable String id) {
+    String msg
     ServiceInstance instance = service.findById(id)
     if (service.isExists(instance)) {
       service.delete(instance)
+      msg = "database is deleted"
+    }else{
+      msg = "no such database"
     }
-    return [:]
+    return [reply:msg]
   }
 }

@@ -20,8 +20,10 @@ class ServiceInstanceService {
   }
 
   boolean isExists(ServiceInstance instance) {
+
     List<String> databases = jdbcTemplate.queryForList("SHOW DATABASES LIKE '${instance.database}'", String)
     return databases?.size() > 0
+    println "!!!!!!!!!!!!!ServiceInstanceService.isExists: databases?.size() " + databases?.size()
   }
 
   int getNumberOfExistingInstances() {
@@ -44,5 +46,6 @@ class ServiceInstance {
   ServiceInstance(String id) {
     String s = id.replaceAll('-', '_')
     database = "${DATABASE_PREFIX}${s}"
+    println "!!!!!!!!!!!!!ServiceInstanceService.ServiceInstance: database " + database
   }
 }

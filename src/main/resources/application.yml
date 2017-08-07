@@ -6,7 +6,7 @@ spring:
   datasource:
     url: jdbc:mysql://localhost/test
     username: root
-    password: root
+    password: password
     driverClassName: com.mysql.jdbc.Driver
   main:
     show_banner: false
